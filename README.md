@@ -24,7 +24,7 @@ To run the pipeline:
 
 5. Execute ./clean_up_real.sh.
 
-6. Execute Rscript make_splatter.R . Note that this step took ~1 week to execute on my desktop computer and in practice was too slow to run on the LSF jobs system I had access to for queuing reasons.
+6. Execute Rscript make_splatter.R . Note that this step took ~1 week to execute on my desktop computer and in practice was too slow to run on the LSF jobs system I had access to for queuing reasons. Note also that this step requires plate data - the BLUEPRINT plate data in this directory is used as a default.
 
 7. Once you have decided which cells to discard and have a directory containing only the gzipped cells you want to simulate, execute *fill in polyester command*. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated.
 
