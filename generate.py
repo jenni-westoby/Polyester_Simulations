@@ -34,6 +34,10 @@ elif program == "ground_truth":
 elif program == "Kallisto":
     writefile("Kallisto", "Simulation/Kallisto_results/*/abundance.tsv", "rsem-generate-data-matrix3", "Counts")
     writefile("Kallisto", "Simulation/Kallisto_results/*/abundance.tsv", "rsem-generate-data-matrix4", "TPM")
+    
+elif program == "Kallisto_real":
+    writefile("Kallisto", "Simulation/Kallisto_results_real_data/*/abundance.tsv", "rsem-generate-data-matrix3", "Counts")
+    writefile("Kallisto", "Simulation/Kallisto_results_real_data/*/abundance.tsv", "rsem-generate-data-matrix4", "TPM")
 
 elif program == "Salmon_align":
     writefile("Salmon_align", "Simulation/Salmon_results/Salmon_Alignment_Results/*/quant.sf", "rsem-generate-data-matrix3", "TPM")
