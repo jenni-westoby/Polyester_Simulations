@@ -4,6 +4,7 @@
 benchmark(){
 
   memory=`pwd`
+  mkdir Simulation/Kallisto_results_real_data
   
   
   if [ "$1" == "Kallisto" ]; then
