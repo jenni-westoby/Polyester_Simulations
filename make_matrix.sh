@@ -32,7 +32,7 @@ make_matrix() {
     rm $1"_FPKM.sh"
     rm $1"_Counts.sh"
   
-  elif [ "$1" == "Kallisto" ] || [ "$1" == "eXpress" ] || [ "$1" == "RSEM" ] || [ "$1" == "Sailfish" ]; then
+  elif [ "$1" == "Kallisto" ] || [ "$1" == "eXpress" ] || [ "$1" == "RSEM" ] || [ "$1" == "Sailfish" ] || [ "$1" == "Kallisto_real" ]; then
     echo $1
     python ./generate.py $1 `pwd` Simulation/$1"_results"
     echo python ./generate.py $1 `pwd` Simulation/$1"_results"
