@@ -28,7 +28,20 @@ To run the pipeline:
 
 7. Execute Rscript make_splatter.R . Note that this step took ~1 week to execute on my desktop computer and in practice was too slow to run on the LSF jobs system I had access to for queuing reasons. Note also that this step requires plate data - the BLUEPRINT plate data in this directory is used as a default.
 
-8. Once you have decided which cells to discard and have a directory containing only the gzipped cells you want to simulate, execute ./control_polyester_script.sh. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated.
+8. Once you have decided which cells to discard and have a directory containing only the gzipped cells you want to simulate, execute ./control_polyester_script.sh. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated. You can change the bias option in make_polyester.R to change whether or not to simulate 3' coverage bias - see the polyester manual. The script in this repository simulates uniform coverage.
+
+9. Execute the following to copy the simulated files into the Simulation/data/simulated directory:
+
+```
+cd Simulation/data
+
+for file in simulated*[0-9];
+do
+  number=`echo $file| awk -Fd '{print $2}'`
+  cp $file/sample_01_1.fasta simulated/sample_$number"_1.fasta"
+  cp $file/sample_01_2.fasta simulated/sample_$number"_2.fasta"
+done
+```
 
 9. If you wish, you can also perform quality control on your simulated cells based on read and alignment quality. This is probably wise, as RSEM sometimes generates cells with very few reads. Execute ./quality_control.sh QC path/to/gtf path/to/fasta and delete any problematic cells from the data/simulated directory.
 
