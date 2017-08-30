@@ -62,7 +62,7 @@ benchmark(){
 
         #Run tool on simulated cells. Each cell is submitted as a seperate job.
         cd Simulation/data/simulated
-        for i in $(find . -name '*_1.fastq*' -o -name '*_1.fq*');
+        for i in $(find . -name '*_1.fasta*');
         do
           base=`echo $i |awk -F/ '{print $2}'`
           filename=`echo $base |awk -F_ '{print $1}'`
