@@ -30,7 +30,7 @@ To run the pipeline:
 
 8. Once you have decided which cells to discard and have a directory containing only the gzipped cells you want to simulate, execute ./control_polyester_script.sh. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated. You can change the bias option in make_polyester.R to change whether or not to simulate 3' coverage bias - see the polyester manual. The script in this repository simulates uniform coverage.
 
-9. Execute the following to copy the simulated files into the Simulation/data/simulated directory:
+9. Download BBTools and follow the installation instructions at https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/. Execute the following to copy the simulated fasta files into the Simulation/data/simulated directory, then convert the files to fastq format:
 
 ```
 cd Simulation/data
@@ -40,6 +40,13 @@ do
   number=`echo $file| awk -Fd '{print $2}'`
   cp $file/sample_01_1.fasta simulated/sample_$number"_1.fasta"
   cp $file/sample_01_2.fasta simulated/sample_$number"_2.fasta"
+done
+
+cd ../..
+for file in Simulation/data/simulated/sample*_1.fasta;
+do
+  filepath=`echo $file | awk -F_ '{print $1"_"$2}'`
+  ./bbmap/reformat.sh in1=$filepath"_1.fasta" in2=$filepath"_2.fasta" out1=$filepath"_1.fq" out2=$filepath"_2.fq" qfake=30
 done
 ```
 
