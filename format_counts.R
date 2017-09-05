@@ -33,15 +33,21 @@ for (i in 1:length(rownames(simulated_counts))){
   #convert lengths to effective lengths
  transcript_length<-(width(small_fasta[i]))-250+1
  for (j in 1:length(RPK)){
-   RPK[j]<-RPK[j] + (simulated_counts[i,j]/transcript_length)
+   if (transcript_length>=1){
+     RPK[j]<-RPK[j] + (simulated_counts[i,j]/transcript_length)
+   }
  }
 }
 
 RPK<-RPK/1000000
 
 for (i in 1:length(rownames(simulated_counts))){
-  transcript_length<-width(small_fasta[i])
-  simulated_counts[i,]<-(simulated_counts[i,]/transcript_length)/RPK
+  if (transcript_length>=1){
+    simulated_counts[i,]<-(simulated_counts[i,]/transcript_length)/RPK
+  }
+  else{
+    simulated_counts[i,]<-0
+  }
 }
                                 
 write.table(simulated_counts, "ground_truth_TPM.txt")
