@@ -53,4 +53,4 @@ for (i in 1:length(rownames(simulated_counts))){
   }
 }
                                 
-write.table(simulated_counts, "ground_truth_TPM_1.txt")
+write.table(simulated_counts, "Simulation/results_matrices/ground_truth_TPM_1.txt")
