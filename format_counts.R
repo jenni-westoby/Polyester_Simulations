@@ -32,6 +32,9 @@ RPK<-vector(length=ncol(simulated_counts))
 for (i in 1:length(rownames(simulated_counts))){
   #convert lengths to effective lengths
  transcript_length<-(width(small_fasta[i]))-250+1
+ if (transcript_length<1){
+   transcript_length<-1
+ }
  for (j in 1:length(RPK)){
    if (transcript_length>=1){
      RPK[j]<-RPK[j] + (simulated_counts[i,j]/transcript_length)
@@ -50,4 +53,4 @@ for (i in 1:length(rownames(simulated_counts))){
   }
 }
                                 
-write.table(simulated_counts, "ground_truth_TPM.txt")
+write.table(simulated_counts, "ground_truth_TPM_1.txt")
