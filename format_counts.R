@@ -23,18 +23,14 @@ simulated_counts<-counts(simulated_counts)
 fasta = readDNAStringSet("Simulation/ref/reference.transcripts.fa")
 small_fasta<-fasta[names(fasta) %in% rownames(MaleB)]
 writeXStringSet(small_fasta, "polyester_transcripts")
-write.table(simulated_counts, "simulated_counts.txt")
-
 rownames(simulated_counts)<-names(small_fasta)
+write.table(simulated_counts, "simulated_counts.txt")
 
 #make scaling vector
 RPK<-vector(length=ncol(simulated_counts))
 for (i in 1:length(rownames(simulated_counts))){
   #convert lengths to effective lengths
  transcript_length<-(width(small_fasta[i]))-250+1
- if (transcript_length<1){
-   transcript_length<-1
- }
  for (j in 1:length(RPK)){
    if (transcript_length>=1){
      RPK[j]<-RPK[j] + (simulated_counts[i,j]/transcript_length)
@@ -45,12 +41,12 @@ for (i in 1:length(rownames(simulated_counts))){
 RPK<-RPK/1000000
 
 for (i in 1:length(rownames(simulated_counts))){
+  transcript_length<-width(small_fasta[i])-250+1
   if (transcript_length>=1){
     simulated_counts[i,]<-(simulated_counts[i,]/transcript_length)/RPK
   }
   else{
     simulated_counts[i,]<-0
   }
-}
-                                
-write.table(simulated_counts, "Simulation/results_matrices/ground_truth_TPM_1.txt")
+} 
+write.table(simulated_counts, "ground_truth_TPM.txt")
