@@ -20,6 +20,12 @@ make_matrix() {
     #Clean up to save space
     #rm -r Simulation/$1"_results"
 
+  elif [ "$1" == "Updated_Salmon_align" ]; then
+    python ./generate.py Updated_Salmon_Alignment_Results `pwd` Simulation/Salmon_results/Updated_Alignment_Results
+    chmod +x Updated_Salmon_Alignment_Results_TPM.sh
+    ./Updated_Salmon_Alignment_Results_TPM.sh
+    rm Updated_Salmon_Alignment_Results_TPM.sh
+
   elif [ "$1" == "ground_truth" ]; then
     python ./generate.py $1 `pwd` Simulation/data/simulated
     chmod +x $1"_TPM.sh"
@@ -32,7 +38,7 @@ make_matrix() {
     rm $1"_FPKM.sh"
     rm $1"_Counts.sh"
   
-  elif [ "$1" == "Kallisto" ] || [ "$1" == "eXpress" ] || [ "$1" == "RSEM" ] || [ "$1" == "Sailfish" ] || [ "$1" == "Kallisto_real" ]; then
+  elif [ "$1" == "Kallisto" ] || [ "$1" == "eXpress" ] || [ "$1" == "RSEM" ] || [ "$1" == "Sailfish" ]; then
     echo $1
     python ./generate.py $1 `pwd` Simulation/$1"_results"
     echo python ./generate.py $1 `pwd` Simulation/$1"_results"
