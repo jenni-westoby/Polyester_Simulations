@@ -26,7 +26,7 @@ To run the pipeline:
 
 7. Execute Rscript make_splatter.R . Note that this step took ~1 week to execute on my desktop computer and in practice was too slow to run on the LSF jobs system I had access to for queuing reasons. Note also that this step requires plate data - the BLUEPRINT plate data in this directory (plate1.txt and plate2.txt) is used as a default.
 
-8. Once you have decided which cells to discard and have a directory containing only the gzipped cells you want to simulate, execute ./control_polyester_script.sh. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated. You can change the bias option in make_polyester.R to change whether or not to simulate 3' coverage bias - see the polyester manual. The script in this repository simulates uniform coverage.
+8. Execute ./control_polyester_script.sh. This script generates one polyester fasta file for each cell in the splatter counts matrix. In addition, format_counts.R is called within this script, which converts the splatter counts matrix to a TPM matrix which is saved as ground_truth_TPM.txt. The simulated cells and their ground truth expression values are saved in Simulation/data/simulated. You can change the bias option in make_polyester.R to change whether or not to simulate 3' coverage bias - see the polyester manual. The script in this repository simulates uniform coverage.
 
 9. Download BBTools and follow the installation instructions at https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/reformat-guide/. Execute the following to copy the simulated fasta files into the Simulation/data/simulated directory, then convert the files to fastq format:
 
