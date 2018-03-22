@@ -18,7 +18,16 @@ To run the pipeline:
 
 3. Execute ./benchmark_real.sh benchmark Kallisto /path/to/data to generate counts data for Kallisto from real data.
 
-4. Execute ./quality_control.sh QC path/to/gtf path/to/fasta path/to/raw/data. This creates a table of quality control statistics. Based on the results of this you can decide which cells you would like to simulate and which you are going to discard.
+4. Execute ./quality_control.sh QC path/to/gtf path/to/fasta path/to/raw/data. This creates a table of quality control statistics. Based on the results of this you can decide which cells you would like to simulate and which you are going to discard.  The thresholds used to discard cells in our manuscript are listed below:
+
+| Statistic | Name of statistic in table | Threshold |
+-------------|--------|---------
+|No. uniquely mapping reads|Unique    | >8000000 |
+|No. of non-uniquely mapping reads|NonUnique|>350000|
+|No. alignments|NumAlign|>8200000|
+|No. of reads|NumReads|>4000000|
+
+In addition, scater was used to identify and remove cells with more than 10% of reads mapping to rRNA. In addition, scater was used to identify and remove cells with more than 10% of reads mapping to rRNA. The counts matrix used by scater was generated using the output of executing ./benchmark_real.sh benchmark Kallisto /path/to/data.
 
 5. Execute ./make_matrix.sh make_matrix Kallisto_real.
 
@@ -48,7 +57,7 @@ do
 done
 ```
 
-10. If you wish, you can also perform quality control on your simulated cells based on read and alignment quality. This is probably wise, as RSEM sometimes generates cells with very few reads. Execute ./quality_control.sh QC path/to/gtf path/to/fasta and delete any problematic cells from the data/simulated directory.
+10. If you wish, you can also perform quality control on your simulated cells based on read and alignment quality. This is probably wise, as RSEM sometimes generates cells with very few reads. Execute ./quality_control.sh QC path/to/gtf path/to/fasta and delete any problematic cells from the data/simulated directory. In our manuscript, cells with greater than 10% of reads mapping to rRNA in the ground truth and/or more than 250,000 non uniquely mapping reads were removed at this stage.
 
 11. Execute ./benchmark.sh benchmark name_of_program_you_want_to_test. This will generate results matrices of expression values for the method you are interested in. Repeat for each method you want to test.
 
